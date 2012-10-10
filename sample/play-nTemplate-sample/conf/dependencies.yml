@@ -1,0 +1,10 @@
+require:
+    - play
+    - modules -> play-nTemplate 0.1
+
+repositories:
+    - MyLocalRepo:
+        type: local
+        artifact: ${application.path}/../../../[module]
+        contains:
+            - modules

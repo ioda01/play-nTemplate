@@ -1,0 +1,16 @@
+#{extends 'main.html' /}
+#{set title:'Home' /}
+
+<div id="template1">#{include './fragments/template1.html'/}</div>
+<div id="template2">#{include './fragments/template2.html'/}</div>
+<div id="template3">#{include './fragments/template3.html'/}</div>
+<div id="template4">#{include './fragments/template4.html'/}</div>
+<div id="template5">#{include './fragments/template5.html'/}</div>
+
+
+<div>
+	<a href="@{Application.index()}" data-cfg='{"url" : "@{Application.testMultiRender()}?arg1=arg1&arg2=arg2", "templates" : ["template1","template2"]}' class="ajaxAware">Click me</a>
+	<a href="#" data-cfg='{"url" : "@{Application.testMultiRender()}?arg1=arg3&arg2=arg4", "templates" : ["template3","template4"]}' class="ajaxAware">Render t3 t4</a>
+	<a href="@{Application.index()}" data-cfg='{"url" : "@{Application.testMultiRender()}", "postData" : {"arg1" : "arg5", "arg2" : "arg5"} , "templates" : ["template5"]}' class="ajaxAware">Render t5</a>
+	<a href="#" data-cfg='{"url" : "@{Application.testMultiRender()}?arg1=all&arg2=all", "templates" : ["template1","template2","template3","template4","template5"]}' class="ajaxAware">Render all</a>
+</div>

@@ -1,0 +1,11 @@
+.classpath
+.project
+.settings
+eclipse
+*.pyc
+tmp
+modules
+dist
+lib
+test-result
+
