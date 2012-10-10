@@ -16,22 +16,9 @@ import play.mvc.results.RenderTemplate;
 import play.templates.Template;
 import play.templates.TemplateLoader;
 
-public class MultiTemplateController extends Controller {
+public class NTemplateController extends Controller {
 
-	/**
-	 * key - fragment id
-	 * value - template path(ex: /templates/tempalte1.html)
-	 */
-	protected static Map<String, String> templatesMapping = new HashMap<String, String>();
-	
 	protected static Map<String, Object> model = new HashMap<String, Object>();
-	
-	protected static void registerTemplate(String key, String path) {
-		if (templatesMapping == null) {
-			templatesMapping = new HashMap<String, String>();
-		}
-		templatesMapping.put(key, path);
-	}
 	
 	protected static Map<String, String> templates(String...fragments) {
 		final Request theRequest = Request.current();

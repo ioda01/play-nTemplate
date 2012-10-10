@@ -5,19 +5,12 @@ import play.mvc.*;
 
 import java.util.*;
 
+import controllers.NTemplateController;
+
 import models.*;
 
-public class Application extends MultiTemplateController {
+public class Application extends NTemplateController {
 
-	@Before
-	protected static void before() {
-//		registerTemplate("template1", "templates/template1.html");
-//		registerTemplate("template2", "templates/template2.html");
-//		registerTemplate("template3", "templates/template3.html");
-//		registerTemplate("template4", "templates/template4.html");
-//		registerTemplate("template5", "templates/template5.html");
-	}
-	
     public static void index() {
     	System.out.println(Play.configuration.get("some.url"));
     	String arg1 = (String) request.params.get("arg1");
@@ -34,4 +27,5 @@ public class Application extends MultiTemplateController {
     	}
     	index();
     }
+
 }
