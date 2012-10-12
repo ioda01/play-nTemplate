@@ -1,31 +1,68 @@
-h1. {module name}
+h1. play-nTemplate
 
-p(note). Write your module documentation in this file, possibly linking to other Textile files, and delete these notes when you are finished.
-
-p(note). Start with a clear statement of what the module is and what it is for. Link to any third-party libraries that the module is based on.
-
-p(note). Briefly describe why you might want to use this module in a Play application.
+The __play-nTemplate__ is play module which can be used to render more than one template per request. In a Rich Internet Application(RIA) many times we confront with situation in which you need to do an Ajax request and then refresh some page parts without refreshing all page, by using __play-nTemplate this practice is easy.  
 
 h2. Sample application
 
-p(note). Your module should contain a sample app in the @sample@ directory that demonstrates the module. Describe how to run the demo here.
+p(note). The @sample@ directory contains the @play-nTemplate-sample@ which is a sample application that demonstrates how the @play-nTemplate@ module works.
+p(note). To start the sample application just change your current directory to the breadcrumsSample directory and then run the command: @play run@
+Then in browser type @http://localhost:9000/@ 
 
 h2. Getting started
 
-p(note). Describe any installation that is required, beyond adding and resolving the module dependency.
-
-h2. Configuration
-
-p(note). List any configuration options that the module uses, with an @h3.@ heading for each one.
+p(note). Add the __play-nTemplate__ module dependency to your project and you are ready to go.
 
 h2. Usage
 
-p(note). Explain how to use the module, and describe any routes, controllers, models or views that the module provides.
+p(note). A nice policy in play is the convention over configuration so I decided to stick with it. As you know in a ply application all html files are stored in
+bc. /app/views/
+and the html files for each controller in a folder with the same name as the controllers.
+Ex: 
+bc. /app/views/MyController/index.html
 
-h2. Tags
+p(note). In the __index.html__ you might have a couple of zones that you want to refresh via ajax. The html fragments will be stored in the following folder
+bc.  /app/views/{controller_name}/fragments
 
-p(note). List any tags the module provides, with an @h3.@ heading for each one. Include the tags’ arguments.
+p(note). To benefit from the play-nTemplate module your controller needs to extend __NTemplateController__.
 
-h2. Commands
+Ex:
+bc. public class MyController extends NTemplateController {
+ // some code here
+ public static void index() {
+ 	render();
+ }
+}
 
-p(note). List any commands the module provides, with an @h3.@ heading for each one. Include the commands’ options.
+p(note). The __index.html__ could look like this:
+
+bc. #{extends 'main.html' /}
+#{set title:'Home' /}  
+
+<div id="template1">#{include './fragments/template1.html'/}</div>
+<div id="template2">#{include './fragments/template2.html'/}</div>
+<div id="template3">#{include './fragments/template3.html'/}</div>
+
+<div>
+	<a href="#" data-cfg='{"url" : "@{MyController.index()}", "templates" : ["template3","template4"]}' class="ajaxAware">Refresh</a>
+</div>
+
+
+p(note). The module comes with small jQuery plugin called __jquery.ajaxaware-1.0.js__ which attaches a click event on all elements with __ajajaxAware__ class and will look after a data-cfg property from where it uses the url and the list of templates ids. As I said before the policy is convention over configuration so the template ids which are sent to the server must match with the html elements id and with the name of the html fragment in __/{controller_name}/fragments/__.
+In other words if I have a this html
+bc. <div id="myDiv">#{include './fragments/myDiv.html'}</div>
+and I want to refresh it via Ajax then I need to submit to MyController 
+bc. templates=myDiv
+then in __myDiv.html__ file should be in the following folder:
+bc. /app/views/MyController/myDiv.html
+
+p(note). The controller response will be a JSON string like this
+
+bc. { "myDiv" : "some escaped html"
+}
+
+p(note). The response is handled in __jquery.ajaxaware-1.0.js__ and the content of the element with id "myDiv" will be replaced with what I have in the JSON response. 
+
+h2. Thanks
+
+p(note). So guys this is it. I'll continue doing some improvements especially on the JavaScript.
+I hope you like it. 
