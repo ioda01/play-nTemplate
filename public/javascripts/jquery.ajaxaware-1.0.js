@@ -54,7 +54,7 @@
 					data = computePostData(cfg.postData);
 				}
 				var $elem = $(cfg.element);
-				window.history.pushState({page: $elem.index()}, $elem.html(), $elem.attr("href") + "?" + data);
+				//window.history.pushState({page: $elem.index()}, $elem.html(), $elem.attr("href") + "?" + data);
 				if (cfg.templates) {
 					data += "&templates=" 
 					$.each(cfg.templates, function(key, value) {
