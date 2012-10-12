@@ -11,6 +11,7 @@ Then in browser type @http://localhost:9000/@
 h2. Getting started
 
 p(note). Add the __play-nTemplate__ module dependency to your project and you are ready to go.
+<<<<<<< HEAD
 
 h2. Usage
 
@@ -32,6 +33,25 @@ p(note). To benefit from the play-nTemplate module your controller needs to exte
 Ex:
 
 bc. public class MyController extends NTemplateController {
+=======
+
+h2. Usage
+
+p(note). A nice policy in play is the convention over configuration so I decided to stick with it. As you know in a ply application all html files are stored in
+bc. /app/views/
+and the html files for each controller in a folder with the same name as the controllers.
+Ex: 
+bc. /app/views/MyController/index.html
+
+p(note). In the __index.html__ you might have a couple of zones that you want to refresh via ajax. The html fragments will be stored in the following folder
+bc.  /app/views/{controller_name}/fragments
+
+p(note). To benefit from the play-nTemplate module your controller needs to extend __NTemplateController__.
+
+Ex:
+bc. public class MyController extends NTemplateController {
+ // some code here
+>>>>>>> c885c6e4bde78e4ee66b31f4c7c8fe4d3003445f
  public static void index() {
  	render();
  }
@@ -42,17 +62,26 @@ p(note). The __index.html__ could look like this:
 bc. #{extends 'main.html' /}
 #{set title:'Home' /}  
 
+<<<<<<< HEAD
 bc. <div id="template1">#{include './fragments/template1.html'/}</div>
 <div id="template2">#{include './fragments/template2.html'/}</div>
 <div id="template3">#{include './fragments/template3.html'/}</div>
 
 bc. <div>
+=======
+<div id="template1">#{include './fragments/template1.html'/}</div>
+<div id="template2">#{include './fragments/template2.html'/}</div>
+<div id="template3">#{include './fragments/template3.html'/}</div>
+
+<div>
+>>>>>>> c885c6e4bde78e4ee66b31f4c7c8fe4d3003445f
 	<a href="#" data-cfg='{"url" : "@{MyController.index()}", "templates" : ["template3","template4"]}' class="ajaxAware">Refresh</a>
 </div>
 
 
 p(note). The module comes with small jQuery plugin called __jquery.ajaxaware-1.0.js__ which attaches a click event on all elements with __ajajaxAware__ class and will look after a data-cfg property from where it uses the url and the list of templates ids. As I said before the policy is convention over configuration so the template ids which are sent to the server must match with the html elements id and with the name of the html fragment in __/{controller_name}/fragments/__.
 In other words if I have a this html
+<<<<<<< HEAD
 
 bc. <div id="myDiv">#{include './fragments/myDiv.html'}</div>
 
@@ -62,6 +91,12 @@ bc. templates=myDiv
 
 then in __myDiv.html__ file should be in the following folder:
 
+=======
+bc. <div id="myDiv">#{include './fragments/myDiv.html'}</div>
+and I want to refresh it via Ajax then I need to submit to MyController 
+bc. templates=myDiv
+then in __myDiv.html__ file should be in the following folder:
+>>>>>>> c885c6e4bde78e4ee66b31f4c7c8fe4d3003445f
 bc. /app/views/MyController/myDiv.html
 
 p(note). The controller response will be a JSON string like this
