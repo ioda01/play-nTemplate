@@ -71,7 +71,7 @@ p(note). The controller response will be a JSON string like this
 bc. { "myDiv" : "some escaped html"
 }
 
-p(note). The response is handled in __jquery.ajaxaware-1.0.js__ and the content of the element with id "myDiv" will be replaced with what I have in the JSON response. 
+p(note). The response is handled in __jq.nTemplate-1.0.js__ and the content of the element with id "myDiv" will be replaced with what I have in the JSON response. 
 
 h2. Thanks
 
