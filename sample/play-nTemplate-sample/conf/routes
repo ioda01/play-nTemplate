@@ -5,7 +5,7 @@
 # Home page
 GET     /                                       Application.index
 *       /multi                                  Application.testMultiRender
-GET     /test/*\#*                      Application.index
+GET     /test/*\#*                              Application.index
 
 # Ignore favicon requests
 GET     /favicon.ico                            404

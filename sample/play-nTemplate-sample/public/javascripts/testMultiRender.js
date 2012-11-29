@@ -5,9 +5,12 @@
 			this.bindAjaxAware();
 		},
 		bindAjaxAware : function() {
-			$(".ajaxAware").each(function(){
+			$(".ajaxAware").bind('click', function(e){
+				if (!$(e.target).is("input[type=checkbox]")) { // checkboxes should remain checked/unchecked when clicked 
+					e.preventDefault();
+				}
 				var $this = $(this);
-				$this.ajaxAware( $.extend({'dataType' : 'json'}, $this.data('cfg')));
+				$.when($.nTemplateLoad($this.data('cfg'))).done(function(data){$.nTemplateHandler(data)});
 			});
 		}
 	});
