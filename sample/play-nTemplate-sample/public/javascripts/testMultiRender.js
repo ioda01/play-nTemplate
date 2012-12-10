@@ -1,6 +1,6 @@
-(function($,NS){
+(function($){
 	window.MR = window.MR || {};
-	window[NS].TestMulti = $.extend({},{
+	window.MR.TestMulti = $.extend({},{
 		init : function() {
 			this.bindAjaxAware();
 		},
@@ -15,6 +15,6 @@
 		}
 	});
 	$(function(){
-		window[NS].TestMulti.init();
+		window.MR.TestMulti.init();
 	});
-})(jQuery,'MR');
+})(jQuery);
